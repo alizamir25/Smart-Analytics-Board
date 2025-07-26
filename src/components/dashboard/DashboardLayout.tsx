@@ -45,6 +45,7 @@ export const DashboardLayout = ({
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3, roles: ['admin', 'analyst', 'viewer'] },
     { id: 'data', label: 'Data Sources', icon: Database, roles: ['admin', 'analyst'] },
     { id: 'upload', label: 'Upload Data', icon: Upload, roles: ['admin', 'analyst'] },
+    { id: 'visualizations', label: 'Advanced Charts', icon: TrendingUp, roles: ['admin', 'analyst', 'viewer'] },
     { id: 'analytics', label: 'Predictive Analytics', icon: TrendingUp, roles: ['admin', 'analyst'] },
     { id: 'insights', label: 'ML Insights', icon: Brain, roles: ['admin', 'analyst'] },
     { id: 'reports', label: 'Reports', icon: FileText, roles: ['admin', 'analyst', 'viewer'] },
