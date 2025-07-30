@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import React, { useState } from 'react';
+import {
+  ComposableMap,
+  Geographies,
+  Geography,
+  Marker,
+  ZoomableGroup,
+} from 'react-simple-maps';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface GeoMapProps {
   data?: Array<{
@@ -18,12 +20,10 @@ interface GeoMapProps {
   description?: string;
 }
 
+const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+
 export const GeoMap = ({ data = [], title = "Geographic Data", description = "Location-based analytics" }: GeoMapProps) => {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-  const [mapboxToken, setMapboxToken] = useState('');
-  const [isMapInitialized, setIsMapInitialized] = useState(false);
-  const { toast } = useToast();
+  const [hoveredGeo, setHoveredGeo] = useState<string | null>(null);
 
   // Sample data if none provided
   const sampleData = [
@@ -32,120 +32,92 @@ export const GeoMap = ({ data = [], title = "Geographic Data", description = "Lo
     { lng: -87.6298, lat: 41.8781, value: 75, label: "Chicago" },
     { lng: 2.3522, lat: 48.8566, value: 90, label: "Paris" },
     { lng: 139.6917, lat: 35.6895, value: 95, label: "Tokyo" },
+    { lng: -0.1276, lat: 51.5074, value: 88, label: "London" },
+    { lng: 13.4050, lat: 52.5200, value: 82, label: "Berlin" },
+    { lng: -43.1729, lat: -22.9068, value: 78, label: "Rio de Janeiro" },
   ];
 
   const mapData = data.length > 0 ? data : sampleData;
 
-  const initializeMap = () => {
-    if (!mapContainer.current || !mapboxToken) return;
-
-    mapboxgl.accessToken = mapboxToken;
-    
-    try {
-      map.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/light-v11',
-        zoom: 2,
-        center: [0, 20],
-      });
-
-      map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
-
-      map.current.on('load', () => {
-        // Add markers for each data point
-        mapData.forEach((point) => {
-          const el = document.createElement('div');
-          el.className = 'marker';
-          el.style.backgroundColor = 'hsl(var(--primary))';
-          el.style.width = `${Math.max(10, point.value / 5)}px`;
-          el.style.height = `${Math.max(10, point.value / 5)}px`;
-          el.style.borderRadius = '50%';
-          el.style.cursor = 'pointer';
-          el.style.opacity = '0.8';
-          el.style.border = '2px solid white';
-          el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
-
-          const popup = new mapboxgl.Popup({
-            offset: 25,
-            closeButton: false,
-            closeOnClick: false
-          }).setHTML(`
-            <div class="text-sm">
-              <strong>${point.label}</strong><br/>
-              Value: ${point.value}
-            </div>
-          `);
-
-          new mapboxgl.Marker(el)
-            .setLngLat([point.lng, point.lat])
-            .setPopup(popup)
-            .addTo(map.current!);
-
-          el.addEventListener('mouseenter', () => popup.addTo(map.current!));
-          el.addEventListener('mouseleave', () => popup.remove());
-        });
-      });
-
-      setIsMapInitialized(true);
-      toast({
-        title: "Map initialized",
-        description: "Mapbox map loaded successfully",
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to initialize map. Please check your token.",
-        variant: "destructive",
-      });
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      map.current?.remove();
-    };
-  }, []);
-
   return (
-    <Card className="h-full">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        {!isMapInitialized && (
-          <div className="space-y-3">
-            <div className="space-y-2">
-              <Label htmlFor="mapbox-token">Mapbox Public Token</Label>
-              <Input
-                id="mapbox-token"
-                type="text"
-                placeholder="pk.eyJ1IjoieW91ci11c2VybmFtZSIsImEiOiJjbGV..."
-                value={mapboxToken}
-                onChange={(e) => setMapboxToken(e.target.value)}
-                className="font-mono text-sm"
-              />
-              <p className="text-xs text-muted-foreground">
-                Get your token from{' '}
-                <a href="https://mapbox.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                  mapbox.com
-                </a>
-              </p>
-            </div>
-            <Button onClick={initializeMap} disabled={!mapboxToken}>
-              Initialize Map
-            </Button>
+    <TooltipProvider>
+      <Card className="h-full">
+        <CardHeader>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="w-full h-96 border rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-900">
+            <ComposableMap
+              projection="geoEqualEarth"
+              projectionConfig={{
+                scale: 160,
+                center: [0, 0],
+              }}
+              width={800}
+              height={400}
+            >
+              <ZoomableGroup zoom={1}>
+                <Geographies geography={geoUrl}>
+                  {({ geographies }) =>
+                    geographies.map((geo) => (
+                      <Geography
+                        key={geo.rsmKey}
+                        geography={geo}
+                        onMouseEnter={() => setHoveredGeo(geo.properties?.NAME)}
+                        onMouseLeave={() => setHoveredGeo(null)}
+                        style={{
+                          default: {
+                            fill: hoveredGeo === geo.properties?.NAME 
+                              ? "hsl(var(--primary))" 
+                              : "hsl(var(--muted))",
+                            outline: "none",
+                            stroke: "hsl(var(--border))",
+                            strokeWidth: 0.5,
+                          },
+                          hover: {
+                            fill: "hsl(var(--primary))",
+                            outline: "none",
+                            stroke: "hsl(var(--border))",
+                            strokeWidth: 0.5,
+                          },
+                          pressed: {
+                            fill: "hsl(var(--primary))",
+                            outline: "none",
+                            stroke: "hsl(var(--border))",
+                            strokeWidth: 0.5,
+                          },
+                        }}
+                      />
+                    ))
+                  }
+                </Geographies>
+                {mapData.map((marker) => (
+                  <Tooltip key={marker.label}>
+                    <TooltipTrigger asChild>
+                      <Marker coordinates={[marker.lng, marker.lat]}>
+                        <circle
+                          r={Math.max(4, marker.value / 10)}
+                          fill="hsl(var(--primary))"
+                          stroke="white"
+                          strokeWidth={2}
+                          className="cursor-pointer opacity-80 hover:opacity-100 transition-opacity"
+                        />
+                      </Marker>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <div className="text-sm">
+                        <strong>{marker.label}</strong><br/>
+                        Value: {marker.value}
+                      </div>
+                    </TooltipContent>
+                  </Tooltip>
+                ))}
+              </ZoomableGroup>
+            </ComposableMap>
           </div>
-        )}
-        <div 
-          ref={mapContainer} 
-          className={`w-full ${isMapInitialized ? 'h-96' : 'h-48 bg-muted rounded-lg flex items-center justify-center'}`}
-        >
-          {!isMapInitialized && (
-            <p className="text-muted-foreground">Enter your Mapbox token to load the map</p>
-          )}
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </TooltipProvider>
   );
 };
