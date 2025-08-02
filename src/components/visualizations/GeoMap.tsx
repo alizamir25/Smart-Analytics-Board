@@ -47,8 +47,9 @@ export const GeoMap = ({ data = [], title = "Geographic Data", description = "Lo
           <CardDescription>{description}</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="w-full h-96 border rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-900">
-            <ComposableMap
+          <div className="w-full h-96 border rounded-lg bg-slate-50 dark:bg-slate-900 relative">
+            <div className="absolute inset-0 overflow-hidden rounded-lg">
+              <ComposableMap
               projection="geoEqualEarth"
               projectionConfig={{
                 scale: 160,
@@ -115,6 +116,7 @@ export const GeoMap = ({ data = [], title = "Geographic Data", description = "Lo
                 ))}
               </ZoomableGroup>
             </ComposableMap>
+            </div>
           </div>
         </CardContent>
       </Card>

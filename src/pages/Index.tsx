@@ -5,6 +5,7 @@ import { Dashboard } from "@/pages/Dashboard";
 import { DataUpload } from "@/pages/DataUpload";
 import { AdminPanel } from "@/pages/AdminPanel";
 import { AdvancedVisualizations } from "@/pages/AdvancedVisualizations";
+import { DataConnectors } from "@/pages/DataConnectors";
 
 interface User {
   email: string;
@@ -35,6 +36,8 @@ const Index = () => {
         return <DataUpload user={user} />;
       case 'visualizations':
         return <AdvancedVisualizations />;
+      case 'connectors':
+        return <DataConnectors />;
       case 'admin':
         return <AdminPanel user={user} />;
       case 'data':
