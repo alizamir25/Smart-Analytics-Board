@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { CommentSystem } from "@/components/collaboration/CommentSystem";
 import { cn } from "@/lib/utils";
 
 interface ChartCardProps {
@@ -10,6 +11,9 @@ interface ChartCardProps {
   change?: number;
   children: ReactNode;
   className?: string;
+  enableComments?: boolean;
+  user?: { email: string; role: string };
+  chartId?: string;
 }
 
 export const ChartCard = ({ 
@@ -18,7 +22,10 @@ export const ChartCard = ({
   value, 
   change, 
   children, 
-  className 
+  className,
+  enableComments = false,
+  user,
+  chartId
 }: ChartCardProps) => {
   const getTrendIcon = () => {
     if (change === undefined) return null;
@@ -58,7 +65,13 @@ export const ChartCard = ({
         </div>
       </CardHeader>
       <CardContent>
-        {children}
+        {enableComments && user && chartId ? (
+          <CommentSystem chartId={chartId} user={user}>
+            {children}
+          </CommentSystem>
+        ) : (
+          children
+        )}
       </CardContent>
     </Card>
   );

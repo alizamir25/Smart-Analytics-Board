@@ -2,6 +2,8 @@ import { ChartCard } from "@/components/charts/ChartCard";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { ShareDashboard } from "@/components/collaboration/ShareDashboard";
+import { RealTimeIndicator } from "@/components/collaboration/RealTimeIndicator";
 import { 
   BarChart3, 
   TrendingUp, 
@@ -45,6 +47,7 @@ export const Dashboard = ({ user }: DashboardProps) => {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <RealTimeIndicator currentUser={user} dashboardId="main-dashboard" />
           <Badge variant="outline" className="capitalize">
             {user.role}
           </Badge>
@@ -52,6 +55,7 @@ export const Dashboard = ({ user }: DashboardProps) => {
             <Filter className="h-4 w-4 mr-2" />
             Filter
           </Button>
+          <ShareDashboard dashboardId="main-dashboard" user={user} />
           <Button size="sm">
             <Download className="h-4 w-4 mr-2" />
             Export
@@ -61,28 +65,56 @@ export const Dashboard = ({ user }: DashboardProps) => {
 
       {/* Key metrics */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <ChartCard title="Total Revenue" value="$45,231" change={20.1}>
+        <ChartCard 
+          title="Total Revenue" 
+          value="$45,231" 
+          change={20.1}
+          enableComments={true}
+          user={user}
+          chartId="revenue-metric"
+        >
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <DollarSign className="h-4 w-4" />
             <span>+20.1% from last month</span>
           </div>
         </ChartCard>
         
-        <ChartCard title="Active Users" value="2,350" change={15.3}>
+        <ChartCard 
+          title="Active Users" 
+          value="2,350" 
+          change={15.3}
+          enableComments={true}
+          user={user}
+          chartId="users-metric"
+        >
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Users className="h-4 w-4" />
             <span>+15.3% from last month</span>
           </div>
         </ChartCard>
         
-        <ChartCard title="Conversion Rate" value="3.24%" change={-2.4}>
+        <ChartCard 
+          title="Conversion Rate" 
+          value="3.24%" 
+          change={-2.4}
+          enableComments={true}
+          user={user}
+          chartId="conversion-metric"
+        >
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <TrendingUp className="h-4 w-4" />
             <span>-2.4% from last month</span>
           </div>
         </ChartCard>
         
-        <ChartCard title="Avg. Session" value="4m 32s" change={8.7}>
+        <ChartCard 
+          title="Avg. Session" 
+          value="4m 32s" 
+          change={8.7}
+          enableComments={true}
+          user={user}
+          chartId="session-metric"
+        >
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Activity className="h-4 w-4" />
             <span>+8.7% from last month</span>
@@ -95,6 +127,9 @@ export const Dashboard = ({ user }: DashboardProps) => {
         <ChartCard 
           title="Revenue vs Target" 
           description="Monthly performance comparison"
+          enableComments={true}
+          user={user}
+          chartId="revenue-chart"
         >
           <div className="h-64 flex items-center justify-center border-2 border-dashed border-muted rounded-lg">
             <div className="text-center text-muted-foreground">
@@ -108,6 +143,9 @@ export const Dashboard = ({ user }: DashboardProps) => {
         <ChartCard 
           title="User Growth" 
           description="User acquisition over time"
+          enableComments={true}
+          user={user}
+          chartId="growth-chart"
         >
           <div className="h-64 flex items-center justify-center border-2 border-dashed border-muted rounded-lg">
             <div className="text-center text-muted-foreground">
