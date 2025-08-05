@@ -29,6 +29,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { AddUserForm } from "@/components/forms/AddUserForm";
 
 interface AdminPanelProps {
   user: { email: string; role: 'admin' | 'analyst' | 'viewer' };
@@ -121,6 +122,10 @@ export const AdminPanel = ({ user }: AdminPanelProps) => {
     ));
   };
 
+  const handleAddUser = (newUser: User) => {
+    setUsers(prev => [...prev, newUser]);
+  };
+
   return (
     <div className="space-y-6">
       {/* System overview */}
@@ -188,10 +193,7 @@ export const AdminPanel = ({ user }: AdminPanelProps) => {
                 Manage user accounts and permissions
               </CardDescription>
             </div>
-            <Button>
-              <UserPlus className="h-4 w-4 mr-2" />
-              Add User
-            </Button>
+            <AddUserForm onAddUser={handleAddUser} />
           </div>
         </CardHeader>
         <CardContent>
