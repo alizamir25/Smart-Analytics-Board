@@ -43,6 +43,7 @@ export const DashboardLayout = ({
 
   const navigationItems = [
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3, roles: ['admin', 'analyst', 'viewer'] },
+    { id: 'templates', label: 'Dashboard Templates', icon: FileText, roles: ['admin', 'analyst', 'viewer'] },
     { id: 'data', label: 'Data Sources', icon: Database, roles: ['admin', 'analyst'] },
     { id: 'upload', label: 'Upload Data', icon: Upload, roles: ['admin', 'analyst'] },
     { id: 'visualizations', label: 'Advanced Charts', icon: TrendingUp, roles: ['admin', 'analyst', 'viewer'] },

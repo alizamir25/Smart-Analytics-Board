@@ -6,6 +6,7 @@ import { DataUpload } from "@/pages/DataUpload";
 import { AdminPanel } from "@/pages/AdminPanel";
 import { AdvancedVisualizations } from "@/pages/AdvancedVisualizations";
 import { DataConnectors } from "@/pages/DataConnectors";
+import { DashboardTemplates } from "@/pages/DashboardTemplates";
 
 interface User {
   email: string;
@@ -32,6 +33,8 @@ const Index = () => {
     switch (currentPage) {
       case 'dashboard':
         return <Dashboard user={user} />;
+      case 'templates':
+        return <DashboardTemplates user={user} />;
       case 'upload':
         return <DataUpload user={user} />;
       case 'visualizations':
