@@ -7,6 +7,7 @@ import { AdminPanel } from "@/pages/AdminPanel";
 import { AdvancedVisualizations } from "@/pages/AdvancedVisualizations";
 import { DataConnectors } from "@/pages/DataConnectors";
 import { DashboardTemplates } from "@/pages/DashboardTemplates";
+import SecurityGovernance from "@/pages/SecurityGovernance";
 
 interface User {
   email: string;
@@ -41,6 +42,8 @@ const Index = () => {
         return <AdvancedVisualizations />;
       case 'connectors':
         return <DataConnectors />;
+      case 'security':
+        return <SecurityGovernance />;
       case 'admin':
         return <AdminPanel user={user} />;
       case 'data':

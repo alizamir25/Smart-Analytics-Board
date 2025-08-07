@@ -21,6 +21,7 @@ import {
   LogOut,
   Menu,
   X,
+  Shield,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -51,6 +52,7 @@ export const DashboardLayout = ({
     { id: 'analytics', label: 'Predictive Analytics', icon: TrendingUp, roles: ['admin', 'analyst'] },
     { id: 'insights', label: 'ML Insights', icon: Brain, roles: ['admin', 'analyst'] },
     { id: 'reports', label: 'Reports', icon: FileText, roles: ['admin', 'analyst', 'viewer'] },
+    { id: 'security', label: 'Security & Governance', icon: Shield, roles: ['admin'] },
     { id: 'admin', label: 'Admin Panel', icon: Settings, roles: ['admin'] },
     { id: 'users', label: 'User Management', icon: Users, roles: ['admin'] },
   ];
