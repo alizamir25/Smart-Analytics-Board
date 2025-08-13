@@ -8,6 +8,9 @@ import { AdvancedVisualizations } from "@/pages/AdvancedVisualizations";
 import { DataConnectors } from "@/pages/DataConnectors";
 import { DashboardTemplates } from "@/pages/DashboardTemplates";
 import SecurityGovernance from "@/pages/SecurityGovernance";
+import { KPITracking } from "@/pages/KPITracking";
+import { EmbeddedMode } from "@/pages/EmbeddedMode";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 interface User {
   email: string;
@@ -34,6 +37,10 @@ const Index = () => {
     switch (currentPage) {
       case 'dashboard':
         return <Dashboard user={user} />;
+      case 'kpi':
+        return <KPITracking />;
+      case 'embed':
+        return <EmbeddedMode />;
       case 'templates':
         return <DashboardTemplates user={user} />;
       case 'upload':
@@ -92,14 +99,16 @@ const Index = () => {
   }
 
   return (
-    <DashboardLayout
-      user={user}
-      currentPage={currentPage}
-      onPageChange={setCurrentPage}
-      onLogout={handleLogout}
-    >
-      {renderPage()}
-    </DashboardLayout>
+    <LanguageProvider>
+      <DashboardLayout
+        user={user}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+        onLogout={handleLogout}
+      >
+        {renderPage()}
+      </DashboardLayout>
+    </LanguageProvider>
   );
 };
 
