@@ -9,6 +9,7 @@ import { DataConnectors } from "@/pages/DataConnectors";
 import { DashboardTemplates } from "@/pages/DashboardTemplates";
 import SecurityGovernance from "@/pages/SecurityGovernance";
 import { KPITracking } from "@/pages/KPITracking";
+import { AlertsAutomation } from "@/pages/AlertsAutomation";
 import { EmbeddedMode } from "@/pages/EmbeddedMode";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
@@ -39,6 +40,8 @@ const Index = () => {
         return <Dashboard user={user} />;
       case 'kpi':
         return <KPITracking />;
+      case 'alerts':
+        return <AlertsAutomation />;
       case 'embed':
         return <EmbeddedMode />;
       case 'templates':

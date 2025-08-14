@@ -16,6 +16,7 @@ const translations = {
     // Navigation
     'nav.dashboard': 'Dashboard',
     'nav.kpi': 'KPI Tracking',
+    'nav.alerts': 'Alerts & Automation',
     'nav.embed': 'Embedded Mode',
     'nav.templates': 'Dashboard Templates',
     'nav.security': 'Security & Governance',

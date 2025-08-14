@@ -24,6 +24,7 @@ import {
   Shield,
   Target,
   Code,
+  Bell,
 } from "lucide-react";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { cn } from "@/lib/utils";
@@ -48,6 +49,7 @@ export const DashboardLayout = ({
   const navigationItems = [
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3, roles: ['admin', 'analyst', 'viewer'] },
     { id: 'kpi', label: 'KPI Tracking', icon: Target, roles: ['admin', 'analyst', 'viewer'] },
+    { id: 'alerts', label: 'Alerts & Automation', icon: Bell, roles: ['admin', 'analyst'] },
     { id: 'embed', label: 'Embedded Mode', icon: Code, roles: ['admin', 'analyst'] },
     { id: 'templates', label: 'Dashboard Templates', icon: FileText, roles: ['admin', 'analyst', 'viewer'] },
     { id: 'data', label: 'Data Sources', icon: Database, roles: ['admin', 'analyst'] },
