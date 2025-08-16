@@ -59,6 +59,100 @@ const translations = {
     'common.success': 'Success',
     'common.error': 'Error',
     'common.language': 'Language',
+    'common.apply': 'Apply',
+    'common.configure': 'Configure',
+    'common.close': 'Close',
+    'common.reset': 'Reset',
+    'common.preview': 'Preview',
+    'common.exitPreview': 'Exit Preview',
+    'common.exportReport': 'Export Report',
+    'common.refreshData': 'Refresh Data',
+    
+    // Alerts
+    alerts: {
+      title: "Alerts & Automation",
+      createRule: "Create Alert Rule",
+      manageRules: "Manage Rules",
+      scheduleReports: "Schedule Reports",
+      history: "Alert History"
+    },
+    
+    // Data Lineage
+    dataLineage: {
+      title: "Data Lineage",
+      description: "Track data flow and transformation history",
+      pageTitle: "Data Lineage & Quality",
+      pageDescription: "Monitor data quality, track lineage, and ensure data integrity",
+      lastUpdated: "Last updated",
+      totalSources: "Total sources",
+      activeSources: "Active Sources",
+      refresh: "Refresh Lineage"
+    },
+    
+    // Quality
+    quality: {
+      title: "Data Quality",
+      overallScore: "Overall Quality Score",
+      scoreDescription: "Comprehensive quality assessment of your data",
+      basedOn: "Based on",
+      validationRules: "Validation Rules",
+      automatedChecks: "Automated quality checks and validations",
+      detectedIssues: "Detected Issues",
+      issuesRequireAttention: "Data quality issues that require attention",
+      noIssuesFound: "No quality issues found",
+      currentScore: "Current Score",
+      activeIssues: "Active Issues",
+      trends: "Quality Trends",
+      historicalTrends: "Historical Quality Trends",
+      trendsDescription: "Track quality improvements over time"
+    },
+    
+    // Branding
+    branding: {
+      customBranding: "Custom Branding",
+      brandingDescription: "Customize the appearance and branding of your dashboards",
+      themeManager: "Theme Manager",
+      customizeAppearance: "Customize colors, fonts, and branding elements",
+      colors: "Colors",
+      logoAndBranding: "Logo & Branding",
+      typography: "Typography",
+      exportTheme: "Export Theme",
+      customColors: "Custom Colors",
+      adjustColors: "Adjust primary, secondary, and accent colors",
+      predefinedPalettes: "Predefined Palettes",
+      quickColorSchemes: "Quick color schemes for common themes",
+      logoUpload: "Logo Upload",
+      logoDescription: "Upload your company logo for branded exports",
+      changeLogo: "Change Logo",
+      uploadLogo: "Upload Logo",
+      companyName: "Company Name",
+      enterCompanyName: "Enter your company name",
+      selectFonts: "Select fonts for headings and body text",
+      headingFont: "Heading Font",
+      bodyFont: "Body Font",
+      headingPreview: "This is a heading preview",
+      bodyPreview: "This is body text that shows how your content will look.",
+      exportDescription: "Export your theme configuration or import an existing one",
+      downloadTheme: "Download Theme",
+      importTheme: "Import Theme",
+      currentConfiguration: "Current Configuration",
+      themePreview: "Theme Preview",
+      previewDescription: "Preview how your theme will look",
+      brandedExports: "Branded Exports",
+      themeCustomization: "Theme Customization",
+      brandTemplates: "Brand Templates",
+      exportBrandKit: "Export Brand Kit",
+      logoFeatureDescription: "Upload and manage your company logo",
+      colorDescription: "Customize primary and accent colors",
+      fontDescription: "Choose fonts for headings and body text",
+      whiteLabelDescription: "Remove all Lovable branding (Pro feature)",
+      customFonts: "Custom Fonts",
+      whiteLabel: "White Label",
+      comingSoon: "Coming Soon",
+      templatesDescription: "Pre-designed branded templates for reports and dashboards",
+      templatesComingSoon: "Brand templates will be available soon",
+      notifyWhenReady: "Notify When Ready"
+    }
   },
   es: {
     // Navigation

@@ -54,6 +54,10 @@ const Index = () => {
         return <DataConnectors />;
       case 'security':
         return <SecurityGovernance />;
+      case 'lineage':
+        return <DataLineageQuality />;
+      case 'branding':
+        return <CustomBranding />;
       case 'admin':
         return <AdminPanel user={user} />;
       case 'data':
