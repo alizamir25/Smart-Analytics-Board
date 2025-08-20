@@ -11,6 +11,8 @@ import SecurityGovernance from "@/pages/SecurityGovernance";
 import { KPITracking } from "@/pages/KPITracking";
 import { AlertsAutomation } from "@/pages/AlertsAutomation";
 import { EmbeddedMode } from "@/pages/EmbeddedMode";
+import { DataLineageQuality } from "@/pages/DataLineageQuality";
+import { CustomBranding } from "@/pages/CustomBranding";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 interface User {
