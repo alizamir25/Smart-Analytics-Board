@@ -13,6 +13,7 @@ import { AlertsAutomation } from "@/pages/AlertsAutomation";
 import { EmbeddedMode } from "@/pages/EmbeddedMode";
 import { DataLineageQuality } from "@/pages/DataLineageQuality";
 import { CustomBranding } from "@/pages/CustomBranding";
+import { PredictiveAnalytics } from "@/pages/PredictiveAnalytics";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 interface User {
@@ -70,12 +71,7 @@ const Index = () => {
           </div>
         );
       case 'analytics':
-        return (
-          <div className="text-center py-12">
-            <h2 className="text-2xl font-bold mb-4">Predictive Analytics</h2>
-            <p className="text-muted-foreground">ML model interface coming soon</p>
-          </div>
-        );
+        return <PredictiveAnalytics />;
       case 'insights':
         return (
           <div className="text-center py-12">
