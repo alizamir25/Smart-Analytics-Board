@@ -2,8 +2,11 @@ import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AuditLog } from "@/components/security/AuditLog";
 import { RowLevelSecurity } from "@/components/security/RowLevelSecurity";
+import { ColumnLevelSecurity } from "@/components/security/ColumnLevelSecurity";
 import { DataMasking } from "@/components/security/DataMasking";
-import { Shield, Database, EyeOff } from "lucide-react";
+import { SSOConfiguration } from "@/components/security/SSOConfiguration";
+import { ComplianceManager } from "@/components/security/ComplianceManager";
+import { Shield, Database, EyeOff, Key, FileCheck, Lock } from "lucide-react";
 
 const SecurityGovernance: React.FC = () => {
   return (
@@ -16,18 +19,30 @@ const SecurityGovernance: React.FC = () => {
       </div>
 
       <Tabs defaultValue="audit" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="audit" className="flex items-center gap-2">
             <Shield className="h-4 w-4" />
             Audit Logs
           </TabsTrigger>
           <TabsTrigger value="rls" className="flex items-center gap-2">
             <Database className="h-4 w-4" />
-            Row-Level Security
+            Row Security
+          </TabsTrigger>
+          <TabsTrigger value="cls" className="flex items-center gap-2">
+            <Lock className="h-4 w-4" />
+            Column Security
           </TabsTrigger>
           <TabsTrigger value="masking" className="flex items-center gap-2">
             <EyeOff className="h-4 w-4" />
             Data Masking
+          </TabsTrigger>
+          <TabsTrigger value="sso" className="flex items-center gap-2">
+            <Key className="h-4 w-4" />
+            SSO Config
+          </TabsTrigger>
+          <TabsTrigger value="compliance" className="flex items-center gap-2">
+            <FileCheck className="h-4 w-4" />
+            Compliance
           </TabsTrigger>
         </TabsList>
 
@@ -39,8 +54,20 @@ const SecurityGovernance: React.FC = () => {
           <RowLevelSecurity />
         </TabsContent>
 
+        <TabsContent value="cls" className="mt-6">
+          <ColumnLevelSecurity />
+        </TabsContent>
+
         <TabsContent value="masking" className="mt-6">
           <DataMasking />
+        </TabsContent>
+
+        <TabsContent value="sso" className="mt-6">
+          <SSOConfiguration />
+        </TabsContent>
+
+        <TabsContent value="compliance" className="mt-6">
+          <ComplianceManager />
         </TabsContent>
       </Tabs>
     </div>
